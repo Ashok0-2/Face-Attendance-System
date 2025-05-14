@@ -14,7 +14,7 @@ def insert_user(full_name, email, id_number, face_image):
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='Ashok@6716',
+            password='your password',
             database='face_attendance'
         )
 
