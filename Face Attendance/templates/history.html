@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance History - FaceAttend</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="min-h-screen bg-gradient">
+        <!-- Header -->
+        <header class="header-dashboard">
+            <div class="container">
+                <div class="header-content">
+                    <a href="{{ url_for('dashboard') }}" class="logo">FaceAttend</a>
+                    <div class="user-section">
+                        <span id="welcomeUser" class="welcome-text">Welcome, User</span>
+                        <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="container main-content">
+            <div class="page-header">
+                <h2 class="page-title">Attendance History</h2>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-sm">Back to Dashboard</a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Your Attendance Records</h2>
+                    <p class="card-description">View your complete attendance history</p>
+                </div>
+                <div class="card-content">
+                    <div id="historyRecords" class="history-records">
+                        <!-- History records will be inserted here by JavaScript -->
+                        <p class="empty-state">No attendance records found.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/auth-check.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - FaceAttend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="min-h-screen bg-gradient">
+        <header class="header-dashboard">
+            <div class="container">
+                <div class="header-content">
+                    <a href="dashboard.html" class="logo">FaceAttend</a>
+                    <div class="user-section">
+                        <span id="welcomeUser" class="welcome-text">Welcome, User</span>
+                        <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container main-content">
+            <div class="page-header">
+                <h2 class="page-title">My Profile</h2>
+                <a href="dashboard.html" class="btn btn-outline btn-sm">Back to Dashboard</a>
+            </div>
+
+            <div class="profile-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Profile Information</h2>
+                        <p class="card-description">Update your personal information</p>
+                    </div>
+                    <div class="card-content">
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="userId">ID Number</label>
+                                <input type="text" id="userId" disabled>
+                                <p class="input-help-text">ID number cannot be changed</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="registrationDate">Registration Date</label>
+                                <input type="text" id="registrationDate" disabled>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button id="updateProfileBtn" class="btn btn-primary btn-full">Update Profile</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Face Recognition</h2>
+                        <p class="card-description">Update your face for recognition</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label>Face Image</label>
+                            <div id="faceCapture" class="face-capture-container">
+                                <div id="cameraPlaceholder" class="placeholder-image face-capture-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="  stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                                        <circle cx="12" cy="13" r="3"></circle>
+                                    </svg>
+                                    <p>Click to update your face</p>
+                                </div>
+                                <div id="cameraContainer" class="camera-container hidden">
+                                    <video id="video" autoplay playsinline muted></video>
+                                    <canvas id="canvas" class="face-canvas"></canvas>
+                                    <button type="button" id="captureBtn" class="btn btn-primary capture-btn" disabled>Capture</button>
+                                    <div id="noFaceDetected" class="no-face-message hidden">No face detected</div>
+                                </div>
+                                <div id="capturedImageContainer" class="captured-image-container hidden">
+                                    <img id="capturedImage" src="/placeholder.svg" alt="Captured face">
+                                    <button type="button" id="retakeBtn" class="btn btn-outline retake-btn">Retake</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button id="updateFaceBtn" class="btn btn-outline btn-full">Update Face Recognition</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <div class="toast-title">Success</div>
+            <div class="toast-description">Profile updated successfully.</div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    
+    <script src="{{ url_for('static', filename='js/face-recognition.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/auth-check.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</body>
+</html>

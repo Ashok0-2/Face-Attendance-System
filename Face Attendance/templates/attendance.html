@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mark Attendance - FaceAttend</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="min-h-screen bg-gradient">
+        <!-- Header -->
+        <header class="header-dashboard">
+            <div class="container">
+                <div class="header-content">
+                    <a href="{{ url_for('dashboard') }}" class="logo">FaceAttend</a>
+                    <div class="user-section">
+                        <span id="welcomeUser" class="welcome-text">Welcome, User</span>
+                        <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="container main-content">
+            <div class="form-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Mark Attendance</h2>
+                        <p class="card-description">Use face recognition to mark your attendance</p>
+                    </div>
+
+                    <div class="card-content">
+                        <!-- Attendance type selector -->
+                        <div class="attendance-type-selector">
+                            <button id="checkInTypeBtn" class="btn btn-primary attendance-type-btn active">Check In</button>
+                            <button id="checkOutTypeBtn" class="btn btn-outline attendance-type-btn">Check Out</button>
+                        </div>
+
+                        <!-- Face capture -->
+                        <div class="form-group">
+                            <div id="faceCapture" class="face-capture-container">
+                                <div id="cameraPlaceholder" class="placeholder-image face-capture-placeholder">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                                        <circle cx="12" cy="13" r="3"></circle>
+                                    </svg>
+                                    <p>Click to capture your face</p>
+                                </div>
+
+                                <div id="verifyingContainer" class="verifying-container hidden">
+                                    <div class="spinner"></div>
+                                    <p>Verifying your face...</p>
+                                </div>
+
+                                <div id="cameraContainer" class="camera-container hidden">
+                                    <video id="video" autoplay playsinline muted></video>
+                                    <canvas id="canvas" class="face-canvas"></canvas>
+                                    <button type="button" id="captureBtn" class="btn btn-primary capture-btn" disabled>Capture</button>
+                                    <div id="noFaceDetected" class="no-face-message hidden">No face detected</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer buttons -->
+                    <div class="card-footer attendance-footer">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline">Back to Dashboard</a>
+                        <button id="markAttendanceBtn" class="btn btn-primary">Check In</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Message -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <div class="toast-title">Success</div>
+            <div class="toast-description">Attendance marked successfully.</div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+
+    <script src="{{ url_for('static', filename='js/face-recognition.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/auth-check.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/attendance.js') }}"></script>
+</body>
+</html>

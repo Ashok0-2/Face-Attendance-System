@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - FaceAttend</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+</head>
+
+<body>
+  <div class="min-h-screen bg-gradient">
+    <header class="container">
+      <div class="header-content">
+        <a href="{{ url_for('index') }}" class="logo">FaceAttend</a>
+        <div class="header-buttons">
+          <a href="{{ url_for('login') }}" class="btn btn-outline">Login</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container main-content">
+      <div class="form-container">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Register</h2>
+            <p class="card-description">Create your account with face recognition</p>
+          </div>
+
+          <div class="card-content">
+            <form id="registerForm">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="id">ID Number</label>
+                <input type="text" id="id" placeholder="Enter your ID number" required />
+              </div>
+
+              <div class="form-group">
+                <label>Face Capture</label>
+                <div id="faceCapture" class="face-capture-container">
+                  <div id="cameraPlaceholder" class="placeholder-image face-capture-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                      <circle cx="12" cy="13" r="3"></circle>
+                    </svg>
+                    <p>Click to capture your face</p>
+                  </div>
+
+                  <div id="cameraContainer" class="camera-container">
+                    <video id="video" autoplay playsinline muted width="480" height="360" style="border-radius: 10px;"></video>
+                    <canvas id="canvas" class="face-canvas hidden" width="480" height="360"></canvas>
+                    <button type="button" id="captureBtn" class="btn btn-primary capture-btn" disabled style="margin-top: 10px;">Capture</button>
+                    <div id="noFaceDetected" class="no-face-message hidden" style="color: red; margin-top: 10px;">No face detected</div>
+                </div>                
+
+                  <div id="capturedImageContainer" class="captured-image-container hidden">
+                    <img id="capturedImage" src="#" alt="Captured face" />
+                    <button type="button" id="retakeBtn" class="btn btn-outline retake-btn">Retake</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="card-footer">
+            <button type="button" id="registerBtn" class="btn btn-primary btn-full">Register</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden">
+    <div class="toast-content">
+      <div class="toast-title">Success</div>
+      <div class="toast-description">Your account has been created successfully.</div>
+    </div>
+  </div>
+
+  
+  <!-- Load correct face-api.js browser script -->
+<!--<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>-->
+
+<!-- Load your model loader -->
+<script defer src="{{ url_for('static', filename='js/face-api-setup.js') }}"></script>
+
+<!-- Load register.js after face-api and model loader -->
+<script defer src="{{ url_for('static', filename='js/register.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FaceAttend</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="min-h-screen bg-gradient">
+        <header class="header-dashboard">
+            <div class="container">
+                <div class="header-content">
+                    <a href="/dashboard" class="logo">FaceAttend</a>
+                    <div class="user-section">
+                        <span id="welcomeUser" class="welcome-text">Welcome, User</span>
+                        <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container main-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-main">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Dashboard</h2>
+                            <p id="currentDate" class="card-description">Today is January 1, 2025</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="attendance-buttons">
+                                <button id="checkInBtn" class="btn btn-primary btn-lg">Check In</button>
+                                <button id="checkOutBtn" class="btn btn-outline btn-lg">Check Out</button>
+                            </div>
+                            <div class="today-activity">
+                                <h3 class="section-title">Today's Activity</h3>
+                                <div id="todayRecords" class="activity-records">
+                                    <p class="empty-state">No activity recorded today.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-sidebar">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quick Links</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="quick-links">
+                                <a href="/attendance" class="btn btn-outline btn-full btn-left">Mark Attendance</a>
+                                <a href="/history" class="btn btn-outline btn-full btn-left">View History</a>
+                                <a href="/profile" class="btn btn-outline btn-full btn-left">My Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <div class="toast-title">Success</div>
+            <div class="toast-description">Attendance marked successfully.</div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
